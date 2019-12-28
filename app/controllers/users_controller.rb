@@ -52,7 +52,7 @@ class UsersController < ApplicationController
       flash[:message] = "Welcome back #{@user.username}"
     #log them in
     #redirect to user's profile (user's show)
-      redirect to "/users/#{@current_user.slug}"
+      redirect to "/users/#{current_user.slug}"
     else
       flash[:error] = "Your credentials were invalid. Try again!"
       redirect '/login'
