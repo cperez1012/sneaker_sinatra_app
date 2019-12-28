@@ -20,6 +20,27 @@ class UsersController < ApplicationController
       flash[:error] = "Your credentials were invalid. Try again!"
       redirect '/login'
     end
+
+    #users SHOW route
+    get "/users/:id" do
+      #find the user
+      @user = User.find_by(id: params[:id])
+      erb :'/users/signup'
+    end
+
+    post '/users' do
+      @user = User.create(params)
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
+    end
+
+    #log out
+    #get logout that clears the session hash
+    get '/logout'
+
+      session.clears
+      redirect '/'
+    end
   end
 
 end
