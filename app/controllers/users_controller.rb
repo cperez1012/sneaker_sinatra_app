@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     #authenticate the user
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:message] = "Welcome back #{user.name}"
+      # flash[:message] = "Welcome back #{user.name}"
     #log them in
     #redirect to user's profile (user's show)
       redirect "/users/#{user.id}"
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     #get logout that clears the session hash
     get '/logout' do
 
-      session.clears
+      session.clear
       redirect '/'
     end
 
