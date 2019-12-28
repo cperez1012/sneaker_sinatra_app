@@ -20,6 +20,7 @@ class UsersController < ApplicationController
       flash[:error] = "Your credentials were invalid. Try again!"
       redirect '/login'
     end
+  end
 
     #users SHOW route
     get "/users/:id" do
@@ -36,11 +37,10 @@ class UsersController < ApplicationController
 
     #log out
     #get logout that clears the session hash
-    get '/logout'
+    get '/logout' do
 
       session.clears
       redirect '/'
     end
-  end
 
 end
