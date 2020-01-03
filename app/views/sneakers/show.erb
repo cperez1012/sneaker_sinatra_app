@@ -1,0 +1,17 @@
+<h3><%= @sneaker.name %></h3>
+<img src="<%= @sneaker.image_url %>" alt="<%= @sneaker.name %>" height="200" width="200">
+<br><br>
+<strong>Created At: <%= @sneaker.created_at %></strong>
+<p><%= @sneaker.description %></p>
+<p>By: <%= @sneaker.user.username %></p>
+
+<% if authorized_to_edit?(@sneaker) %>
+
+<a href="/sneakers/<%= @sneaker.id %>/edit">Edit Sneaker</a>
+
+<form class="" action="/sneakers/<%= @sneaker.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete This Sneaker">
+</form>
+
+<% end %>
