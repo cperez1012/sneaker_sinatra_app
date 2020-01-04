@@ -6,14 +6,18 @@ class SneakersController < ApplicationController
     erb :'sneakers/index'
   end
 
-  # get '/sneakers/new' do
-  #   if logged_in?
-  #     erb :'sneakers/new'
-  #   else
-  #     flash[:error] = "You mudt be logged in to do that"
-  #     redirect to '/'
-  #   end
-  # end
+  get '/sneakers' do
+    "Hello World"
+  end
+
+  get '/sneakers/new' do
+    if logged_in?
+      erb :'sneakers/new'
+    else
+      flash[:error] = "You mudt be logged in to do that"
+      redirect to '/'
+    end
+  end
 
   post '/sneakers' do
     sneaker = Sneaker.new(params)
@@ -22,7 +26,7 @@ class SneakersController < ApplicationController
       redirect to "/sneakers/#{sneaker.id}"
     else
       flash[:error] = "Sneaker Creation Failed"
-      redirect 'sneakers/new'
+      redirect '/sneakers/new'
     end
   end
 
