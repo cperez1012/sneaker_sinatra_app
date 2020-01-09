@@ -2,7 +2,7 @@ class SneakersController < ApplicationController
 
 #CRUD
   get '/sneakers' do
-    @sneakers = Sneakers.all
+    @sneakers = Sneaker.all
     erb :'sneakers/index'
   end
 
@@ -21,7 +21,7 @@ class SneakersController < ApplicationController
   end
 
   get '/sneakers/:id/edit' do
-    @sneaker = sneaker.find(params[:id])
+    @sneaker = Sneaker.find(params[:id])
     if authorized_to_edit?(@sneaker)
       erb :'sneakers/edit'
     else
@@ -31,10 +31,10 @@ class SneakersController < ApplicationController
   end
 
   post '/sneakers' do
-    sneaker = Sneaker.new(params)
-    if sneaker.save
+    @sneaker = Sneaker.new(params)
+    if @sneaker.save
       flash[:message] = "Sneaker saved successfully!"
-      redirect to "/sneakers/#{sneaker.id}"
+      redirect to "/sneakers/#{@sneaker.id}"
     else
       flash[:error] = "Sneaker Creation Failed"
       redirect '/sneakers/new'
