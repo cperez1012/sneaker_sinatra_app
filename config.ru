@@ -6,5 +6,5 @@ end
 
 Rack::MethodOverride
 use UsersController
-
+use SneakersController
 run ApplicationController
