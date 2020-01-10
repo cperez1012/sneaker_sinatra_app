@@ -15,10 +15,11 @@ class SneakersController < ApplicationController
     end
   end
 
-  get '/sneakers/:id' do
-    @sneaker = Sneaker.find(params[:id])
+  get '/sneakers/:user_id' do
+    #id from params is current user id
+    # @sneaker = Sneaker.find(params[:user_id])
     # binding.pry
-    @user = User.find(@sneaker.user_id)
+    @user = User.find(params[:user_id])
     erb :"sneakers/show"
   end
 

@@ -26,7 +26,7 @@
 
       <div class="nav">
         <% if logged_in? %>
-          <a href="/sneakers/show">All Sneakers</a>
+          <a href="/sneakers/<%= current_user.id %>">All Sneakers</a>
           <a href="/sneakers/new">Create a Sneaker item</a>
           <a href="/logout">Log Out</a>
         <% end %>
