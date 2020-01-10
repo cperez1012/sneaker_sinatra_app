@@ -17,6 +17,8 @@ class SneakersController < ApplicationController
 
   get '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
+    binding.pry
+    @user = User.find(@sneaker.user_id)
     erb :"sneakers/show"
   end
 
@@ -31,7 +33,10 @@ class SneakersController < ApplicationController
   end
 
   post '/sneakers' do
-    @sneaker = Sneaker.new(params)
+    # binding.pry
+    @sneaker = Sneaker.new(params[:sneaker])
+    # binding.pry
+    @sneaker.user_id = current_user.id
     if @sneaker.save
       flash[:message] = "Sneaker saved successfully!"
       redirect to "/sneakers/#{@sneaker.id}"
