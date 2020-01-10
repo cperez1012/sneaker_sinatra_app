@@ -17,7 +17,7 @@ class SneakersController < ApplicationController
 
   get '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
-    binding.pry
+    # binding.pry
     @user = User.find(@sneaker.user_id)
     erb :"sneakers/show"
   end

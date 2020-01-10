@@ -1,0 +1,27 @@
+<h1>Update Sneaker</h1>
+<form action="/sneakers/<%= @current_user.id %>" method="post">
+<input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Sneaker Name:</label>
+  <input type="text" name="song_name" value="<%=@sneaker.name%>" id="Name">
+
+  <br><br>
+
+  <label>Image:</label>
+  <input type="text" name="image_url_name"value="<%=@sneaker.image_url%>" id="Image URL">
+  <img src="<%= @sneaker.image_url %>" alt="<%= @sneaker.name %>" height="200" width="200">
+
+  <br><br>
+
+  <label>Category Name:</label>
+  <input type="text" name="category_name"value="<%=@sneaker.category%>" id="Category Name">
+
+  <br><br>
+
+  <label>Description:</label>
+  <input type="text" name="description_name"value="<%=@sneaker.description%>" id="Category Name">
+
+  <br><br>
+  <input type="submit" name="submit" value="Save">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete This Sneaker">
+</form>
