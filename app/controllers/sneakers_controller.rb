@@ -46,6 +46,12 @@ class SneakersController < ApplicationController
     end
   end
 
+  get '/sneakers/:slug/edit' do
+   @sneakers = Sneaker.all
+   @sneaker = Song.find_by_slug(params[:slug])
+   erb :'sneakers/edit'
+ end
+
   patch '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
     @sneaker.update(name: params[:name], category: params[:category], description: params[:description], image_url: params[:image_url])
