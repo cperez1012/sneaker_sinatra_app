@@ -1,5 +1,5 @@
 #this is where I will create seed data to test my associations and app functionality
-christian = User.create(email: "christian@gmail.com", image_url: "https://420ms01dbvwg1ugtc53k31zj-wpengine.netdna-ssl.com/wp-content/uploads/2016/06/luke-monaghan-koozai-480x480.jpg", bio: "I love Air Jordans", password: "christian", username: "christian")
+christian = User.create(email: "christian@gmail.com", image_url: "", bio: "I love Air Jordans", password: "christian", username: "christian")
 
 # gary = User.create(email: "gary@gmail.com", image_url: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdnext.credit-suisse.com%2Fcareers%2Fen%2Four-people%2F_jcr_content%2Fcontent%2Fpagetabscontainer%2Ftabs%2Fpagetab%2FtabContent%2Fflexiblelist%2FflexibleListItems%2Fflexiblelistitem%2Fimage.revampimg.656.high.png%2Four-people-preview-raffaele.png&imgrefurl=https%3A%2F%2Fwww.credit-suisse.com%2Fcareers%2Fen%2Four-people.html&docid=ZFia45OZ7L6AnM&tbnid=I5BdVXrKQJlFlM%3A&vet=10ahUKEwit1M7pndfmAhWBMd8KHXlQBBYQMwiHASgSMBI..i&w=656&h=369&bih=670&biw=727&q=picture%20people&ved=0ahUKEwit1M7pndfmAhWBMd8KHXlQBBYQMwiHASgSMBI&iact=mrc&uact=8", bio: "I love Nike", password: "gary" username: "gary")
 #
