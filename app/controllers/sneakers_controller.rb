@@ -81,5 +81,4 @@ class SneakersController < ApplicationController
  #   @sneaker = Song.find_by_slug(params[:slug])
  #   erb :'sneakers/edit'
  # end
-
 end
