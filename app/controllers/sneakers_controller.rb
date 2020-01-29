@@ -21,11 +21,23 @@ class SneakersController < ApplicationController
       @sneaker_slug = "#{@new_sneaker.name} #{@new_sneaker.image_url} #{@new_sneaker.description} #{@new_sneaker.category}".downcase.gsub('','+')
       @new_sneaker.user_id = current_user.id
       @new_sneaker.save
-      redirect to '/users/show'
+      redirect to '/sneakers/show'
     else
       redirect to '/users/show'
     end
   end
+  #
+  # post '/sneakers' do
+  #   # # if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
+  #   #   @sneaker = Sneaker.create(params)
+  #   # #   @sneaker_slug = "#{@new_sneaker.name} #{@new_sneaker.image_url} #{@new_sneaker.description} #{@new_sneaker.category}".downcase.gsub('','+')
+  #   #   @sneaker.user_id = current_user.id
+  #   #   @sneaker.save
+  #     redirect to '/sneakers/show'
+  #   # else
+  #   #   redirect to '/users/show'
+  #   # end
+  # end
 
   get '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
