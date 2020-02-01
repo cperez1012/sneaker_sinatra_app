@@ -41,8 +41,13 @@ class SneakersController < ApplicationController
 
   get '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
-    erb :'/sneakers/show'
+    erb :'sneakers/show'
   end
+
+  # post '/sneakers/:id' do
+  #   @sneaker = Sneaker.find(params[:id])
+  #   erb :'/sneakers/show'
+  # end
 
   get '/sneakers/:id/edit' do
     @sneaker = Sneaker.find(params[:id])
@@ -54,7 +59,7 @@ class SneakersController < ApplicationController
     if params[:name] != "" && params[:category] != "" && params[:description] != "" && params[:image_url] != ""
       @sneaker.update(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
     end
-      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
+      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('')
       @sneaker.user_id = current_user.id
       @sneaker.save
     redirect to "/sneakers/#{@sneaker.id}"
@@ -62,7 +67,7 @@ class SneakersController < ApplicationController
 
   get '/sneakers/:id/delete' do
     @sneaker = Sneaker.find(params[:id])
-    @sneaker.delete
+    @sneaker.destroy
     redirect to '/sneakers'
   end
 

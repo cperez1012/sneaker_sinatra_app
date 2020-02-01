@@ -1,6 +1,6 @@
 <h1>All Sneakers</h1>
 <% current_user.sneakers.each do |sneaker| %>
-  <h4><a href="/sneakers/<%= sneaker.id %>"><%= sneaker.name %></a></h4>
+  <h4><%= sneaker.name %></h4>
   <img src="<%= sneaker.image_url %>" alt="<%= sneaker.name %>" height="200" width="200">
 <br><br>
   <strong>Created At: <%= sneaker.created_at %></strong>
