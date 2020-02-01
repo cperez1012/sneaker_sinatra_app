@@ -41,7 +41,7 @@ class SneakersController < ApplicationController
 
   get '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
-    erb :'sneakers/show'
+    erb :'sneakers/index'
   end
 
   # post '/sneakers/:id' do
