@@ -39,20 +39,21 @@ class SneakersController < ApplicationController
     end
   end
 
-  get '/sneakers/:id' do
+  put '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
+    @sneaker.update(params)
     erb :'sneakers/index'
   end
 
-  # post '/sneakers/:id' do
-  #   @sneaker = Sneaker.find(params[:id])
-  #   erb :'/sneakers/show'
-  # end
-
-  get '/sneakers/:id/edit' do
-    @sneaker = Sneaker.find_by(params[:id])
-    erb :'/sneakers/edit'
+  get '/sneakers/:id' do
+    @sneaker = Sneaker.find(params[:id])
+    erb :'/sneakers/show'
   end
+
+  # get '/sneakers/:id/edit' do
+  #   @sneaker = Sneaker.find_by(params[:id])
+  #   erb :'/sneakers/edit'
+  # end
 
   patch '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
@@ -65,9 +66,9 @@ class SneakersController < ApplicationController
     redirect to "/sneakers/#{@sneaker.id}"
   end
 
-  get '/sneakers/:id/delete' do
+  delete '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
-    @sneaker.destroy
+    @sneaker.delete
     redirect to '/sneakers'
   end
 
