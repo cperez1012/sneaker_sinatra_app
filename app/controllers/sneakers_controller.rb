@@ -10,34 +10,34 @@ class SneakersController < ApplicationController
     if logged_in?
       erb :'sneakers/new'
     else
-      flash[:error] = "You mudt be logged in to do that"
+      flash[:error] = "You must be logged in to do that"
       redirect to '/'
     end
   end
 
   post '/sneakers/new' do
     if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
-      @new_sneaker = Sneaker.create(params)
-      @sneaker_slug = "#{@new_sneaker.name} #{@new_sneaker.image_url} #{@new_sneaker.description} #{@new_sneaker.category}".downcase.gsub('','+')
-      @new_sneaker.user_id = current_user.id
-      @new_sneaker.save
+      @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
+      @sneaker.user_id = current_user.id
+      @sneaker.save
+      redirect to '/sneakers/index'
+    else
+      redirect to '/users/show'
+    end
+  end
+
+  post '/sneakers' do
+    if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
+      @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
+      @sneaker.user_id = current_user.id
+      @sneaker.save
       redirect to '/sneakers/show'
     else
       redirect to '/users/show'
     end
   end
-  #
-  # post '/sneakers' do
-  #   # # if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
-  #   #   @sneaker = Sneaker.create(params)
-  #   # #   @sneaker_slug = "#{@new_sneaker.name} #{@new_sneaker.image_url} #{@new_sneaker.description} #{@new_sneaker.category}".downcase.gsub('','+')
-  #   #   @sneaker.user_id = current_user.id
-  #   #   @sneaker.save
-  #     redirect to '/sneakers/show'
-  #   # else
-  #   #   redirect to '/users/show'
-  #   # end
-  # end
 
   get '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
@@ -50,7 +50,7 @@ class SneakersController < ApplicationController
   # end
 
   get '/sneakers/:id/edit' do
-    @sneaker = Sneaker.find(params[:id])
+    @sneaker = Sneaker.find_by(params[:id])
     erb :'/sneakers/edit'
   end
 

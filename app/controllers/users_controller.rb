@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   get '/users/show' do
 
    if logged_in?
-     @sneakers = Sneaker.all
+    #  @sneakers = Sneaker.all
      erb :'/users/show'
    else
      redirect to '/login'
