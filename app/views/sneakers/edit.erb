@@ -2,23 +2,23 @@
 <form action="/sneakers/<%= @sneaker.id %>" method="post">
 <input id="hidden" type="hidden" name="_method" value="patch">
   <label>Sneaker Name:</label>
-  <input type="text" name="sneaker_name" value="<%=@sneaker.name%>" id="Name">
+  <input type="text" name="name" value="<%=@sneaker.name%>" id="name">
 
   <br><br>
 
   <label>Image:</label>
-  <input type="text" name="image_url_name"value="<%=@sneaker.image_url%>" id="Image URL">
-  <img src="<%= @sneaker.image_url %>" alt="<%= @sneaker.name %>" height="200" width="200">
+  <input type="text" name="image_url"value="<%=@sneaker.image_url%>" id="image_url">
+  <img src="<%= @sneaker.image_url %>" alt="<%= @sneaker.name %>" height="800" width="800">
 
   <br><br>
 
   <label>Category Name:</label>
-  <input type="text" name="category_name"value="<%=@sneaker.category%>" id="Category Name">
+  <input type="text" name="category"value="<%=@sneaker.category%>" id="category">
 
   <br><br>
 
   <label>Description:</label>
-  <input type="text" name="description_name"value="<%=@sneaker.description%>" id="Category Name">
+  <input type="text" name="description"value="<%=@sneaker.description%>" id="description">
 
   <br><br>
   <button type="update" value="Update" id="update">Update</button>

@@ -1,6 +1,5 @@
 class SneakersController < ApplicationController
 
-#CRUD
   get '/sneakers' do
     @sneakers = Sneaker.all
     erb :'sneakers/index'
@@ -15,64 +14,49 @@ class SneakersController < ApplicationController
     end
   end
 
-  post '/sneakers/new' do
-    if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
-      @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
-      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
-      @sneaker.user_id = current_user.id
-      @sneaker.save
-      binding.pry
-      redirect to '/sneakers/show'
-    else
-      redirect to '/users/show'
-    end
-  end
-
   post '/sneakers' do
-    if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
+    if logged_in?
       @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
-      # @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
       @sneaker.user_id = current_user.id
-      @sneaker.save
-      binding.pry
-      redirect to '/sneakers/show'
+      redirect to "/sneakers/#{@sneaker.id}"
     else
-      redirect to '/users/show'
+      redirect to '/'
     end
   end
 
-  # put '/sneakers/:id' do
-  #   @sneaker = Sneaker.find(params[:id])
-  #   @sneaker.update(params)
-  #   erb :'sneakers/index'
-  # end
+  post '/sneakers/new' do
+    if logged_in?
+      @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+      @sneaker.user_id = current_user.id
+      redirect to "/sneakers/#{@sneaker.id}"
+    else
+      redirect to '/'
+    end
+  end
 
   get '/sneakers/:id' do
-    binding.pry
-    @sneaker = Sneaker.find_by(params[:id])
+    @sneaker = Sneaker.find_by_id(params[:id])
     erb :'/sneakers/show'
   end
 
-  get '/sneakers/:id/edit' do
-    @sneaker = Sneaker.find_by(params[:id])
+  get '/sneakers/:id/edit' do  #load edit form
+    @sneaker = Sneaker.find_by_id(params[:id])
     erb :'/sneakers/edit'
   end
 
-  patch '/sneakers/:id' do
-    @sneaker = Sneaker.find(params[:id])
-    if params[:name] != "" && params[:category] != "" && params[:description] != "" && params[:image_url] != ""
-      @sneaker.update(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
-    end
-      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('')
-      @sneaker.user_id = current_user.id
-      @sneaker.save
+  patch '/sneakers/:id' do #edit action
+    @sneaker = Sneaker.find_by_id(params[:id])
+    @sneaker.name = params[:name]
+    @sneaker.category = params[:category]
+    @sneaker.description = params[:description]
+    @sneaker.image_url = params[:image_url]
+    @sneaker.save
     redirect to "/sneakers/#{@sneaker.id}"
   end
 
-  get '/sneakers/:id/delete' do
-    @sneaker = Sneaker.find_by(params[:id])
+  get '/sneakers/:id/delete' do #delete action
+    @sneaker = Sneaker.find_by_id(params[:id])
     @sneaker.delete
     redirect to '/sneakers'
   end
-
 end
