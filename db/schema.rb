@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20191228013324) do
 
   create_table "sneakers", force: :cascade do |t|
     t.string   "name"
-    t.string   "image_url"
     t.text     "description"
     t.string   "category"
     t.integer  "user_id"
+    t.string   "image_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20191228013324) do
     t.string   "password_digest"
     t.string   "email"
     t.text     "bio"
-    t.string   "image_url"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

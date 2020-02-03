@@ -5,7 +5,6 @@ class CreateUsersTable < ActiveRecord::Migration
       t.string :password_digest
       t.string :email
       t.text :bio
-      t.string :image_url
 
       t.timestamps null: false
     end

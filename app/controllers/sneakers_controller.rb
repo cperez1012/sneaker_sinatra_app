@@ -21,7 +21,8 @@ class SneakersController < ApplicationController
       @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
       @sneaker.user_id = current_user.id
       @sneaker.save
-      redirect to '/sneakers/index'
+      binding.pry
+      redirect to '/sneakers/show'
     else
       redirect to '/users/show'
     end
@@ -30,30 +31,32 @@ class SneakersController < ApplicationController
   post '/sneakers' do
     if logged_in? && params[:name] != "" && params[:image_url] != "" && params[:description] != "" && params[:category] != ""
       @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
-      @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
+      # @sneaker_slug = "#{@sneaker.name} #{@sneaker.image_url} #{@sneaker.description} #{@sneaker.category}".downcase.gsub('','+')
       @sneaker.user_id = current_user.id
       @sneaker.save
+      binding.pry
       redirect to '/sneakers/show'
     else
       redirect to '/users/show'
     end
   end
 
-  put '/sneakers/:id' do
-    @sneaker = Sneaker.find(params[:id])
-    @sneaker.update(params)
-    erb :'sneakers/index'
-  end
+  # put '/sneakers/:id' do
+  #   @sneaker = Sneaker.find(params[:id])
+  #   @sneaker.update(params)
+  #   erb :'sneakers/index'
+  # end
 
   get '/sneakers/:id' do
-    @sneaker = Sneaker.find(params[:id])
+    binding.pry
+    @sneaker = Sneaker.find_by(params[:id])
     erb :'/sneakers/show'
   end
 
-  # get '/sneakers/:id/edit' do
-  #   @sneaker = Sneaker.find_by(params[:id])
-  #   erb :'/sneakers/edit'
-  # end
+  get '/sneakers/:id/edit' do
+    @sneaker = Sneaker.find_by(params[:id])
+    erb :'/sneakers/edit'
+  end
 
   patch '/sneakers/:id' do
     @sneaker = Sneaker.find(params[:id])
@@ -66,8 +69,8 @@ class SneakersController < ApplicationController
     redirect to "/sneakers/#{@sneaker.id}"
   end
 
-  delete '/sneakers/:id' do
-    @sneaker = Sneaker.find(params[:id])
+  get '/sneakers/:id/delete' do
+    @sneaker = Sneaker.find_by(params[:id])
     @sneaker.delete
     redirect to '/sneakers'
   end
