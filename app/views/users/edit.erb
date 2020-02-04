@@ -1,0 +1,14 @@
+<h1>Update User Information</h1>
+<form action="/users/<%= @user.id %>" method="post">
+<input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Username:</label>
+  <input type="text" name="name" value="<%=@user.name%>" id="name">
+
+  <br><br>
+
+  <label>Bio:</label>
+  <input type="text" name="bio"value="<%=@user.bio%>" id="category">
+
+  <br><br>
+  <button type="update" value="Update" id="update">Update</button>
+</form>
