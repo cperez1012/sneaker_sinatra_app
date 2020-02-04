@@ -18,4 +18,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
-See [License.md](License.md)
+See [LICENSE.txt](LICENSE.txt)
