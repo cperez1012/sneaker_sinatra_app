@@ -1,13 +1,12 @@
 class SneakersController < ApplicationController
 
   get '/sneakers' do
-    # if logged_in?
-      @sneakers = current_user.sneakers.all
-      binding.pry
+    if logged_in? && current_user
+      @sneakers = Sneaker.all
       erb :'sneakers/index'
-    # else
-    #   redirect to '/'
-    # end
+    else
+      redirect to '/'
+    end
   end
 
   get '/sneakers/new' do
@@ -21,9 +20,19 @@ class SneakersController < ApplicationController
 
   post '/sneakers' do
     if logged_in?
-      @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
-      @sneaker.user_id = current_user.id
-      redirect to "/sneakers/#{@sneaker.id}"
+      if params[:id] = ""
+        redirect to '/sneakers/new'
+      else
+        @sneaker = current_user.sneakers.build(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+        if @sneaker.save
+          redirect to "/sneakers/#{@sneaker.id}"
+        else
+          redirect to '/sneakers/new'
+        end
+      end
+      #   @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+      # @sneaker.user_id = current_user.id
+      # redirect to "/sneakers/#{@sneaker.id}"
     else
       redirect to '/'
     end
@@ -31,9 +40,19 @@ class SneakersController < ApplicationController
 
   post '/sneakers/new' do
     if logged_in?
-      @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
-      @sneaker.user_id = current_user.id
-      redirect to "/sneakers/#{@sneaker.id}"
+      if params[:id] = ""
+        redirect to '/sneakers/new'
+      else
+        @sneaker = current_user.sneakers.build(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+        if @sneaker.save
+          redirect to "/sneakers/#{@sneaker.id}"
+        else
+          redirect to '/sneakers/new'
+        end
+      end
+      #   @sneaker = Sneaker.create(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
+      # @sneaker.user_id = current_user.id
+      # redirect to "/sneakers/#{@sneaker.id}"
     else
       redirect to '/'
     end
@@ -45,8 +64,16 @@ class SneakersController < ApplicationController
   end
 
   get '/sneakers/:id/edit' do  #load edit form
-    @sneaker = Sneaker.find_by_id(params[:id])
-    erb :'/sneakers/edit'
+    if logged_in?
+      @sneaker = Sneaker.find_by_id(params[:id])
+      # if @sneaker && @sneaker.user == current_user
+        erb :'/sneakers/edit'
+      # else
+      #   redirect to '/sneakers'
+      # end
+    else
+      redirect to '/login'
+    end
   end
 
   patch '/sneakers/:id' do #edit action
@@ -55,6 +82,7 @@ class SneakersController < ApplicationController
     @sneaker.category = params[:category]
     @sneaker.description = params[:description]
     @sneaker.image_url = params[:image_url]
+    @sneaker.user_id = params[:user_id]
     @sneaker.save
     redirect to "/sneakers/#{@sneaker.id}"
   end
