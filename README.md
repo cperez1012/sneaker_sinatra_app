@@ -18,4 +18,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
-This project is licensed under the GNU GPLv3 - see the [LICENSE](LICENSE) file for details.
+See [License.md](License.md)
