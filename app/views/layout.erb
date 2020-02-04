@@ -27,6 +27,7 @@
       <div class="nav">
         <% if logged_in? %>
           <a href="/sneakers">All Sneakers</a>
+          <a href="/users/show">Welcome Page</a>
           <a href="/sneakers/new">Create a Sneaker item</a>
           <a href="/logout">Log Out</a>
         <% end %>
@@ -35,7 +36,7 @@
         <%= yield %>
 
       <footer class="branding">
-        <small>&copy; 2019 <strong>SneakerSinatraApp</strong></small>
+        <small>&copy; 2019 <strong>TheSneakerClosetApp</strong></small>
       </footer>
     </div>
 
