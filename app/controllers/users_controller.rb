@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   get '/users/show' do
-
    if logged_in?
      erb :'/users/show'
    else
@@ -14,11 +13,18 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] != "" && params[:password] != "" && params[:email] != "" && params[:bio] != ""
-      @new_user = User.create(:username => params[:username], :password => params[:password], :email => params[:email], :bio => params[:bio])
-      @new_user.save
-      session[:user_id] = @new_user.id
-      redirect to '/users/show'
+    user = User.create(params)
+    session[:id] = user.id
+    if !session[:id].nil?
+      flash[:message] = 'User account created!'
+      erb :'/users/show'
+    end
+    if params[:password] != params[:password_confirmation]
+      flash[:error] = 'Passwords do not match!'
+      redirect to '/signup'
+    elsif
+      flash[:error] = 'Username and/or email already in use!'
+      redirect to '/signup'
     else
       redirect to '/signup'
     end
@@ -34,12 +40,10 @@ class UsersController < ApplicationController
 
   post "/login" do
     current_user = User.find_by(:username => params[:username])
-    # binding.pry
     if current_user && current_user.authenticate(params[:password])
      session[:user_id] = current_user.id
-    #  binding.pry
      flash[:message] = "Welcome back #{current_user.username}"
-     redirect to '/sneakers'
+     redirect to "/users/#{current_user.id}"
     else
      flash[:error] = "Your credentials were invalid. Try again!"
      redirect to '/login'

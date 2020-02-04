@@ -1,8 +1,13 @@
 class SneakersController < ApplicationController
 
   get '/sneakers' do
-    @sneakers = Sneaker.all
-    erb :'sneakers/index'
+    # if logged_in?
+      @sneakers = current_user.sneakers.all
+      binding.pry
+      erb :'sneakers/index'
+    # else
+    #   redirect to '/'
+    # end
   end
 
   get '/sneakers/new' do

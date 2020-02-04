@@ -1,12 +1,13 @@
 <h1>All Sneakers</h1>
+<br>
 <% @sneakers.each do |sneaker| %>
-  <h4><%= sneaker.name %></h4>
-  <img src="<%= sneaker.image_url %>" alt="<%= sneaker.name %>" height="200" width="200">
+  <h1><%= sneaker.name %></h1>
+  <img src="<%= sneaker.image_url %>" alt="<%= sneaker.name %>" height="400" width="400">
 <br><br>
   <strong>Created At: <%= sneaker.created_at %></strong>
   <p><%= sneaker.description %></p>
   <a href="/sneakers/<%= sneaker.id %>/edit">Edit</a>
   <br>
   <a href="/sneakers/<%= sneaker.id %>/delete">Delete</a>
-
+  <br>
 <% end %>
