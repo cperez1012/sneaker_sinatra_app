@@ -1,6 +1,6 @@
 # The Sneaker Closet
 
-The Sneaker Closet is a collection monitoring application written in Ruby. Huntress uses the Sinatra web application framework for the backend and the Bootstrap framework for the responsive front-end.
+The Sneaker Closet is a collection monitoring application written in Ruby. The Sneaker Closet uses the Sinatra web application framework for the backend and the Bootstrap framework for the responsive front-end.
 
 ## Built With
 
