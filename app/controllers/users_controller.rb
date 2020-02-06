@@ -14,8 +14,9 @@ class UsersController < ApplicationController
 
   post '/signup' do
     user = User.create(params)
-    session[:id] = user.id
-    if !session[:id].nil?
+    session[:user_id] = user.id
+    # binding.pry
+    if !session[:user_id].nil?
       flash[:message] = 'User account created!'
       erb :'/users/show'
     end

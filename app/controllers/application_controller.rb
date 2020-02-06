@@ -25,6 +25,12 @@ class ApplicationController < Sinatra::Base
 
     def current_user
        @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+      #  binding.pry
+    end
+
+    def authorized_to_edit?
+      @sneaker = Sneaker.find_by_id(params[:id])
+      current_user.id == @sneaker.user_id
     end
   end
 end

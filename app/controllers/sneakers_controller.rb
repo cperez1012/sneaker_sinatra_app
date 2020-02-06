@@ -18,7 +18,7 @@ class SneakersController < ApplicationController
     end
   end
 
-  post '/sneakers/new' do
+  post '/sneakers' do
     if logged_in?
       @sneaker = current_user.sneakers.build(:name => params[:name], :category => params[:category], :description => params[:description], :image_url => params[:image_url])
         if @sneaker.save
@@ -37,8 +37,8 @@ class SneakersController < ApplicationController
   end
 
   get '/sneakers/:id/edit' do  #load edit form
-    if logged_in?
-      @sneaker = Sneaker.find_by_id(params[:id])
+    if logged_in? && authorized_to_edit?
+      # @sneaker = Sneaker.find_by_id(params[:id])
         erb :'/sneakers/edit'
     else
       redirect to '/login'
@@ -51,7 +51,8 @@ class SneakersController < ApplicationController
     @sneaker.category = params[:category]
     @sneaker.description = params[:description]
     @sneaker.image_url = params[:image_url]
-    @sneaker.user_id = params[:user_id]
+    # @sneaker.user_id = params[:user_id]
+    # binding.pry
     @sneaker.save
     redirect to "/sneakers/#{@sneaker.id}"
   end
